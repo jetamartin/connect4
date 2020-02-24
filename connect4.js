@@ -126,6 +126,7 @@ class Game {
 
   endGame(msg) {
     const topRow = document.querySelector('#column-top');
+    topRow.classList.remove("active-game");
     alert(msg);
     if (this.gameIsOver) {
       // After game is over disable the hover event by looping over all Tds and setting pointer-events = "none"
@@ -133,8 +134,6 @@ class Game {
       topRowTdNodes.forEach((td) => td.style.pointerEvents = "none");
       // Remove the event listener to prevent user from adding more pieces after the game is over
       topRow.removeEventListener('click', this.handleClick);
-      topRow.classList.remove("active-game");
-
     }
   }
 
@@ -162,7 +161,7 @@ class Game {
     
     // check for tie
     if (this.board.every(row => row.every(cell => cell))) {
-      return this.endGame('Tie!');
+       return this.endGame('Tie!');
     }
       
     // switch players
