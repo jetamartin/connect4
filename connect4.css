@@ -30,7 +30,7 @@
 }
 
 .active-game td {
-  background: palegreen;
+  background-color: palegreen;
 }
 
 #column-top td:hover {

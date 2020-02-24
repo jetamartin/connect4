@@ -125,13 +125,16 @@ class Game {
   /** endGame: announce game end */
 
   endGame(msg) {
+    const topRow = document.querySelector('#column-top');
     alert(msg);
     if (this.gameIsOver) {
       // After game is over disable the hover event by looping over all Tds and setting pointer-events = "none"
       let topRowTdNodes = document.querySelectorAll('#column-top td');
       topRowTdNodes.forEach((td) => td.style.pointerEvents = "none");
       // Remove the event listener to prevent user from adding more pieces after the game is over
-      document.querySelector('#column-top').removeEventListener('click', this.handleClick);
+      topRow.removeEventListener('click', this.handleClick);
+      topRow.classList.remove("active-game");
+
     }
   }
 
@@ -224,7 +227,7 @@ class Player {
 function pauseGame() {
   const topRow = document.getElementById('column-top');
   if (topRow) {
-    topRow.style.background = "none";
+    topRow.classList.remove("active-game");
     //Disable the hover event by looping over all Tds and setting pointer-events = "none"
     let topRowTdNodes = document.querySelectorAll('#column-top td');
     topRowTdNodes.forEach((td) => td.style.pointerEvents = "none");
@@ -352,7 +355,9 @@ const handleGameStart = () =>  {
     
     let connect4 = new Game(player1, player2);
     connect4.initGame();
-    document.getElementById('column-top').style.backgroundColor = "palegreen";
+    // document.getElementById('column-top').style.backgroundColor = "palegreen";
+    document.getElementById('column-top').classList.add("active-game");
+
   } 
 
 }
